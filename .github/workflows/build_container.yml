@@ -23,7 +23,8 @@ jobs:
         run: |
           cd runtime_container/opt-350m && \
           git lfs install && \
-          git clone https://huggingface.co/facebook/opt-350m
+          git clone https://huggingface.co/facebook/opt-350m && \
+          mv opt-350m/* .
 
       - name: Quantize Model
         run: |
