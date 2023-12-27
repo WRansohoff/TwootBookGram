@@ -6,4 +6,4 @@ optimum[openvino,nncf,onnxruntime]
 transformers
 
 # Tensorflow
-tensorflow
+#tensorflow
