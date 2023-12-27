@@ -5,5 +5,5 @@ redis
 optimum[openvino,nncf,onnxruntime]
 transformers
 
-# Tensorflow
-#tensorflow
+# OpenVINO model optimizer
+openvino
