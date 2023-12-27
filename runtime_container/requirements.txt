@@ -1,0 +1,6 @@
+# Caching
+redis
+
+# Huggingface AI model pipeline packages
+optimum[openvino,nncf,onnxruntime]
+transformers

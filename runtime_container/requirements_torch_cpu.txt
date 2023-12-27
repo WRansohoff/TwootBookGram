@@ -1,0 +1,7 @@
+# PyTorch CPU-only index (no CUDA/etc, since we won't have a GPU)
+--index-url https://download.pytorch.org/whl/cpu
+
+# PyTorch packages
+torch
+torchaudio
+torchvision
