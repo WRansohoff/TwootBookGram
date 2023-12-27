@@ -1,0 +1,48 @@
+name: Build and Deploy LLM Runtime Container
+
+on:
+  workflow_dispatch
+
+jobs:
+  build_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch AWS Credentials
+        run: echo "TODO"
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          cd runtime_container/ && \
+          pip install -r requirements.txt && \
+          pip install -r requirements_torch_cpu.txt
+
+      - name: Download Model
+        run: |
+          cd runtime_container/opt-350m && \
+          wget https://huggingface.co/facebook/opt-350m/raw/main/config.json && \
+          wget https://huggingface.co/facebook/opt-350m/raw/main/generation_config.json && \
+          wget https://huggingface.co/facebook/opt-350m/raw/main/merges.txt && \
+          wget https://huggingface.co/facebook/opt-350m/raw/main/special_tokens_map.json && \
+          wget https://huggingface.co/facebook/opt-350m/raw/main/tokenizer_config.json && \
+          wget https://huggingface.co/facebook/opt-350m/raw/main/vocab.json && \
+          wget https://huggingface.co/facebook/opt-350m/raw/main/pytorch_model.bin
+
+      - name: Quantize Model
+        run: |
+          cd runtime_container/ && \
+          optimum-cli export openvino --model opt-350m/ \
+                                      --cache_dir opt-350m-ov/model_cache/ \
+                                      --task text-generation \
+                                      --int8 \
+                                      opt-350m-ov/
+
+      - name: Build Runtime Container
+        run: |
+          cd runtime_container/ && \
+          docker build .
+
+      - name: Push to ECR
+        run: echo "TODO"
