@@ -2,7 +2,7 @@
 
 This project is a simple scalable web app which produces AI-generated responses to 140-character messages which a user inputs. It is meant as a demonstration of how to deploy a small scalable AI-based web app very cheaply, and as an art project which holds a mirror up to how ordinary people tend to act in pseudonymous online spaces.
 
-Work In Progress: You can demo the web app at [https://twootbookgram.com](https://twootbookgram.com), but I am still configuring the CI/CD pipeline, tests, documentation.
+Work In Progress: You can demo the web app at [https://twootbookgram.com](https://twootbookgram.com), but it may be unstable and I am still writing the CI/CD pipeline, tests, documentation.
 
 ## Tech Stack
 

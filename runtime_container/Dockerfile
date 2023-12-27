@@ -1,5 +1,11 @@
 FROM public.ecr.aws/lambda/python:3.10
 
+ARG LLM_FORBIDDEN_WORDS=
+ARG REDIS_HOST=
+
+ENV LLM_FORBIDDEN_WORDS $LLM_FORBIDDEN_WORDS
+ENV REDIS_HOST $REDIS_HOST
+
 RUN pip install --upgrade pip && \
     pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu && \
     pip install transformers redis && \

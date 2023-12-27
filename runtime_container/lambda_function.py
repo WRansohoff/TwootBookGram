@@ -2,6 +2,7 @@ from transformers import AutoTokenizer, set_seed, pipeline, AutoModelForCausalLM
 from optimum.intel import OVModelForCausalLM
 
 import json
+import os
 import random
 import redis
 import torch
@@ -12,29 +13,39 @@ ModelClass = OVModelForCausalLM
 # This is a list of words that the model is not allowed to print.
 # This will not prevent the model from printing offensive sentiments,
 # but it should block some of the worst things it could say.
-# Fill in your own list here; I don't want Microsoft banning my
-# GitHub account because it contains naughty words.
-bad_words = [
-]
+# Fill in your own list here by building the container with
+# an "LLM_FORBIDDEN_WORDS" build argument containing a space-separated
+# list of substrings to avoid printing.
+bad_words = os.getenv('LLM_FORBIDDEN_WORDS', default='').split()
+
+# Rate-limiting cache host.
+# If not defined, rate limiting will be disabled.
+cache_host = os.getenv('REDIS_HOST', default='')
 
 def handler(event, context):
-  cache = redis.Redis(host='llmratelimitcache-qw55fm.serverless.use2.cache.amazonaws.com', port=6379, decode_responses=True, ssl=True)
-  from_ip = event['headers']['x-forwarded-for']
-  #from_ip = 'localhost'
-  rl_key = f'{from_ip}:LLM'
-  cache.setnx(rl_key, 10)
-  cache.expire(rl_key, 600)
-  cache.decrby(rl_key, 1)
-  if int(cache.get(rl_key)) <= 0:
-    return { 'responses': ['<rate limit exceeded, please try again later>'] }
+  # Perform rate-limiting if a cache is configured.
+  if cache_host:
+    cache = redis.Redis(host=cache_host, port=6379, decode_responses=True, ssl=True)
+    from_ip = event['headers']['x-forwarded-for']
+    rl_key = f'{from_ip}:LLM'
+    cache.setnx(rl_key, 10)
+    cache.expire(rl_key, 600)
+    cache.decrby(rl_key, 1)
+    if int(cache.get(rl_key)) <= 0:
+      return { 'responses': ['<rate limit exceeded, please try again later>'] }
+  else:
+    print('Warning: no rate-limiting cache configured.')
 
+  # Check that the input string is not too long.
   body = json.loads(event['body'])
   post = body['input']
   if len(post) > 150:
     return { 'responses': ['<your input was too long to process. (150 character limit)>'] }
 
+  # Set the PRNG seed for text generation.
   set_seed(int(random.random()*256))
 
+  # Create the LLM inference pipeline object.
   model = ModelClass.from_pretrained(model_path, use_cache=False)
   tokenizer = AutoTokenizer.from_pretrained(model_path)
   generator=pipeline('text-generation',
@@ -57,6 +68,7 @@ def handler(event, context):
   #prompt_end = 'Reply: '
   prompt_end = 'posted: '
 
+  # Produce and filter three generated responses from the AI model.
   responses = []
   for i in range(3):
     gen_resp = generator(prompt)
@@ -98,6 +110,7 @@ def handler(event, context):
     resp = resp.replace('\\u2019', "'")
     responses.append(resp)
 
+  # Return the generated responses.
   return {
     'responses': responses
   }

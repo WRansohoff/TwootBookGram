@@ -38,7 +38,11 @@ jobs:
       - name: Build Runtime Container
         run: |
           cd runtime_container/ && \
-          docker build .
+          docker build \
+            --build-arg LLM_FORBIDDEN_WORDS="${{secrets.LLM_FORBIDDEN_WORDS}}" \
+            --build-arg REDIS_HOST="${{secrets.REDIS_HOST}}" \
+            -t opt-350m-openvino-int8 \
+            .
 
       - name: Push to ECR
         run: echo "TODO"
