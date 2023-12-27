@@ -22,13 +22,8 @@ jobs:
       - name: Download Model
         run: |
           cd runtime_container/opt-350m && \
-          wget https://huggingface.co/facebook/opt-350m/raw/main/config.json && \
-          wget https://huggingface.co/facebook/opt-350m/raw/main/generation_config.json && \
-          wget https://huggingface.co/facebook/opt-350m/raw/main/merges.txt && \
-          wget https://huggingface.co/facebook/opt-350m/raw/main/special_tokens_map.json && \
-          wget https://huggingface.co/facebook/opt-350m/raw/main/tokenizer_config.json && \
-          wget https://huggingface.co/facebook/opt-350m/raw/main/vocab.json && \
-          wget https://huggingface.co/facebook/opt-350m/raw/main/pytorch_model.bin
+          git lfs install && \
+          git clone https://huggingface.co/facebook/opt-350m
 
       - name: Quantize Model
         run: |
