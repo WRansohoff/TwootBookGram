@@ -3,12 +3,29 @@ name: Build and Deploy LLM Runtime Container
 on:
   workflow_dispatch
 
+# Required permissions for AWS OIDC link.
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: "us-east-2"
+
 jobs:
   build_deploy:
     runs-on: ubuntu-20.04
     steps:
       - name: Fetch AWS Credentials
-        run: echo "TODO"
+        uses: aws-actions/configure-aws-credentials@v1.7.0
+        with:
+          role-to-assume: arn:aws:iam::019887845334:role/PushToECRFromGitHubActions
+          role-session-name: GitHub_to_AWS_OIDC
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to AWS ECR
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -45,4 +62,7 @@ jobs:
             .
 
       - name: Push to ECR
-        run: echo "TODO"
+        run: |
+          # TODO: Use commit hashes instead of 'latest'
+          docker tag opt-350m-openvino-int8:latest ${{secrets.ECR_REPOSITORY}}/opt-350m-openvino-int8:latest
+          docker push ${{secrets.ECR_REPOSITORY}}/opt-350m-openvino-int8:latest
