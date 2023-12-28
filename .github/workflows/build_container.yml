@@ -45,7 +45,7 @@ jobs:
         run: |
           cd runtime_container/ && \
           optimum-cli export openvino --model opt-350m/ \
-                                      --cache_dir opt-350m-ov/model_cache/ \
+                                      --cache_dir /tmp/opt-350m-ov/model_cache/ \
                                       --task text-generation \
                                       --int8 \
                                       opt-350m-ov/
