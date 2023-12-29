@@ -26,6 +26,9 @@ jobs:
         id:   ecr-login
         uses: aws-actions/amazon-ecr-login@v2
 
+      - name: Pull Latest Container Image
+        run: docker pull ${{secrets.ECR_REPOSITORY}}/llm_app_image_repo:latest
+
       - name: Checkout Repository
         uses: actions/checkout@v4
 
