@@ -64,6 +64,19 @@ jobs:
             -auto-approve && \
           echo "app_url=`terraform output -raw s3_static_site`" >> "$GITHUB_OUTPUT"
 
+      - name: Build and push container.
+        run: |
+          cd runtime_container/ && \
+          docker build \
+            --build-arg LLM_FORBIDDEN_WORDS="${{secrets.LLM_FORBIDDEN_WORDS}}" \
+            --build-arg REDIS_HOST="`terraform -chdir=../terraform output -raw redis_endpoint`" \
+            -t ${{secrets.ECR_IMAGE_NAME}} \
+            . && \
+          docker tag \
+            ${{secrets.ECR_IMAGE_NAME}}:latest \
+            ${{secrets.ECR_REPOSITORY}}/${{secrets.ECR_IMAGE_NAME}}:latest && \
+          docker push ${{secrets.ECR_REPOSITORY}}/${{secrets.ECR_IMAGE_NAME}}:latest
+
       - name: Export Static React Site
         run: |
           cd frontend && \
