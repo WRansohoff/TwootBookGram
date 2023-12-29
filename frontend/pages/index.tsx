@@ -21,7 +21,7 @@ export async function getResponses(setResponseLoading: any) {
   setResponseLoading(true);
 
   // Fetch and process the responses.
-  let response = await fetch('https://zz3hoin4y3sozic2x6bjivzkwa0xxput.lambda-url.us-east-2.on.aws/',
+  let response = await fetch('%%LAMBDA_FUNCTION_URL%%',
     {
       method: "POST",
       body: JSON.stringify({input: post})

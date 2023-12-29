@@ -23,6 +23,7 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Login to AWS ECR
+        id:   ecr-login
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Checkout Repository
@@ -51,17 +52,19 @@ jobs:
                                       opt-350m-ov/ && \
           python3 -c "from optimum.intel import OVModelForCausalLM; OVModelForCausalLM.from_pretrained('opt-350m-ov', use_cache=False)"
 
-      - name: Build Runtime Container
+      - name: Deploy Container and Infrastructure
         run: |
-          cd runtime_container/ && \
-          docker build \
-            --build-arg LLM_FORBIDDEN_WORDS="${{secrets.LLM_FORBIDDEN_WORDS}}" \
-            --build-arg REDIS_HOST="${{secrets.REDIS_HOST}}" \
-            -t opt-350m-openvino-int8 \
-            .
+          cd terraform && \
+          terraform apply \
+            -var forbidden_words='${{secrets.LLM_FORBIDDEN_WORDS}}' \
+            -var ecr_address='${{secrets.ECR_REPOSITORY}}' \
+            -var ecr_pw='${{steps.ecr-login.outputs.docker_password}}' \
+            -auto-approve && \
+          echo "app_url=`terraform output -raw s3_static_site`" >> "$GITHUB_OUTPUT"
 
-      - name: Push to ECR
+      - name: Export Static React Site
         run: |
-          # TODO: Use commit hashes instead of 'latest'
-          docker tag opt-350m-openvino-int8:latest ${{secrets.ECR_REPOSITORY}}/opt-350m-openvino-int8:latest
-          docker push ${{secrets.ECR_REPOSITORY}}/opt-350m-openvino-int8:latest
+          cd frontend && \
+          sed -i "s^%%LAMBDA_FUNCTION_URL%%^`terraform -chdir=../terraform output -raw lambda_endpoint`^g" pages/index.tsx && \
+          npm run build && \
+          aws s3 cp --recursive ../frontend/out/* `terraform -chdir=../terraform output -raw s3_url`
