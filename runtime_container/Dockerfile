@@ -6,11 +6,11 @@ ARG REDIS_HOST=
 ENV LLM_FORBIDDEN_WORDS $LLM_FORBIDDEN_WORDS
 ENV REDIS_HOST $REDIS_HOST
 
-RUN pip install --upgrade pip && \
-    pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu && \
-    pip install transformers redis && \
-    pip install --upgrade-strategy eager optimum[openvino,nncf,onnxruntime] && \
-    pip cache purge
+RUN pip install --upgrade pip
+RUN pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+RUN pip install transformers redis
+RUN pip install --upgrade-strategy eager optimum[openvino,nncf,onnxruntime]
+RUN pip cache purge
 
 RUN mkdir ${LAMBDA_TASK_ROOT}/opt-350m-ov
 COPY opt-350m-ov ${LAMBDA_TASK_ROOT}/opt-350m-ov
