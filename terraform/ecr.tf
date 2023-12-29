@@ -17,6 +17,9 @@ resource "docker_image" "llm_app_image" {
       LLM_FORBIDDEN_WORDS: "${var.forbidden_words}"
     }
   }
+  triggers = {
+    dir_sha1 = sha1(join("", [for f in fileset(path.module, "${path.cwd}/runtime_container/[Dl]*") : filesha1(f)]))
+  }
 }
 
 resource "docker_registry_image" "llm_app_image_ecr" {
