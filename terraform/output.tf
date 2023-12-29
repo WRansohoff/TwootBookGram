@@ -6,6 +6,10 @@ output "lambda_endpoint" {
   value = "${aws_lambda_function_url.llm_app_function_url.function_url}"
 }
 
+output "lambda_name" {
+  value = "${var.lambda_name}"
+}
+
 output "ecr_repository" {
   value = "${aws_ecr_repository.llm_app_image_repo.repository_url}"
 }

@@ -22,3 +22,8 @@ variable "ecr_address" {
   description = "Address for private container registry login"
   default = ""
 }
+
+variable "lambda_name" {
+  description = "Function name for the Lambda function which runs the LLM inference."
+  default = "LLMAppLambda"
+}
