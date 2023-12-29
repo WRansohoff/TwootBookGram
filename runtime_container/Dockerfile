@@ -9,7 +9,7 @@ ENV REDIS_HOST $REDIS_HOST
 RUN pip install --upgrade pip
 RUN pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 RUN pip install transformers redis
-RUN pip install --upgrade-strategy eager optimum[openvino,nncf,onnxruntime]
+RUN pip install optimum[openvino,nncf]
 RUN pip cache purge
 
 RUN mkdir ${LAMBDA_TASK_ROOT}/opt-350m-ov
