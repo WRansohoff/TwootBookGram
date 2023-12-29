@@ -55,6 +55,7 @@ jobs:
       - name: Deploy Container and Infrastructure
         run: |
           cd terraform && \
+          sed -i "s^%%TF_STATE_BUCKET_NAME%%^${{secrets.TF_STATE_BUCKET}}^g" providers.tf && \
           terraform apply \
             -var forbidden_words='${{secrets.LLM_FORBIDDEN_WORDS}}' \
             -var ecr_address='${{secrets.ECR_REPOSITORY}}' \
