@@ -87,4 +87,5 @@ jobs:
           sed -i "s^%%LAMBDA_FUNCTION_URL%%^`terraform -chdir=../terraform output -raw lambda_endpoint`^g" pages/index.tsx && \
           npm install && \
           npm run build && \
-          aws s3 cp --recursive ../frontend/out/* `terraform -chdir=../terraform output -raw s3_url`
+          cd out && \
+          aws s3 cp --recursive . `terraform -chdir=../terraform output -raw s3_url`
