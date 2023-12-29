@@ -78,7 +78,7 @@ jobs:
           docker push ${{secrets.ECR_REPOSITORY}}/${{secrets.ECR_IMAGE_NAME}}:latest && \
           aws lambda update-function-code \
             --function-name "`terraform -chdir=../terraform output -raw lambda_name`" \
-            --image-uri ${{secrets.ECR_REPOSITORY}}/${{secrets.ECR_IMAGE_NAME}}:latest
+            --image-uri ${{secrets.ECR_REPOSITORY}}/${{secrets.ECR_IMAGE_NAME}}:latest \
             --publish
 
       - name: Export Static React Site
