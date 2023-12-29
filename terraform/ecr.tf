@@ -10,6 +10,7 @@ resource "aws_ecr_repository" "llm_app_image_repo" {
 resource "docker_image" "llm_app_image" {
   name = "${aws_ecr_repository.llm_app_image_repo.repository_url}:latest"
   depends_on = [aws_ecr_repository.llm_app_image_repo]
+  pull_triggers = [data.docker_registry_image.ubuntu.sha256_digest]
   build {
     context = "${path.cwd}/../runtime_container/."
     build_args = {
