@@ -93,4 +93,4 @@ jobs:
       - name: Output Summary Markdown
         run: |
           export LLM_URL="`terraform -chdir=./terraform output -raw s3_static_page`" && \
-          echo "[$LLM_URL](http://$LLM_URL)" >> $GITHUB_STEP_SUMMARY
+          echo "[$LLM_URL](https://$LLM_URL)" >> $GITHUB_STEP_SUMMARY
