@@ -25,7 +25,7 @@ cache_host = os.getenv('REDIS_HOST', default='')
 def handler(event, context):
   # Perform rate-limiting if a cache is configured.
   if cache_host:
-    cache = redis.Redis(host=cache_host, port=6379, decode_responses=True, ssl=True)
+    cache = redis.Redis(host=cache_host, port=6379, decode_responses=True)
     from_ip = event['headers']['x-forwarded-for']
     rl_key = f'{from_ip}:LLM'
     cache.setnx(rl_key, 10)
