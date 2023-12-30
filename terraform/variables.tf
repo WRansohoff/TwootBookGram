@@ -27,3 +27,8 @@ variable "lambda_name" {
   description = "Function name for the Lambda function which runs the LLM inference."
   default = "LLMAppLambda"
 }
+
+variable "llm_bucket_name" {
+  description = "S3 bucket to store the static React site in."
+  default = "llm-app-staticsite-bucket"
+}

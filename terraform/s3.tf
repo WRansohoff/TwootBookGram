@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "llm_site_bucket" {
-  bucket = "llm-app-staticsite-bucket"
+  bucket = var.llm_bucket_name
 }
 
 resource "aws_s3_bucket_ownership_controls" "llmsb_ownership_ctl" {

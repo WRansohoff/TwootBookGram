@@ -88,4 +88,4 @@ jobs:
           npm install && \
           npm run build && \
           cd out && \
-          aws s3 cp --recursive . "s3://`terraform -chdir=../../terraform output -raw s3_arn`"
+          aws s3 cp --recursive . "s3://`terraform -chdir=../../terraform output -raw s3_bucket`"
