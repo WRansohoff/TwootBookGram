@@ -18,6 +18,10 @@ output "s3_url" {
   value = "${aws_s3_bucket.llm_site_bucket.bucket_domain_name}"
 }
 
+output "s3_arn" {
+  value = "${aws_s3_bucket.llm_site_bucket.arn}"
+}
+
 output "s3_static_page" {
   value = "${aws_s3_bucket.llm_site_bucket.bucket_regional_domain_name}/index.html"
 }
