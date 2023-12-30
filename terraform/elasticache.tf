@@ -31,4 +31,5 @@ resource "aws_elasticache_cluster" "llm_cache" {
   engine_version             = "7.1"
   subnet_group_name          = "${aws_elasticache_subnet_group.llm_subnet_group.name}"
   security_group_ids         = ["${aws_security_group.llm_secgroup.id}"]
+  transit_encryption_enabled = true
 }
