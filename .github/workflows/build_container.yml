@@ -89,3 +89,8 @@ jobs:
           npm run build && \
           cd out && \
           aws s3 cp --recursive --acl public-read . "s3://`terraform -chdir=../../terraform output -raw s3_bucket`"
+
+      - name: Output Summary Markdown
+        run: |
+          export LLM_URL="`terraform -chdir=./terraform output -raw s3_static_page`"
+          echo "# Deployed LLM Web APP:\n\n[$LLM_URL]($LLM_URL)"
