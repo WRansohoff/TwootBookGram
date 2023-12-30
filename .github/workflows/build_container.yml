@@ -92,8 +92,5 @@ jobs:
 
       - name: Output Summary Markdown
         run: |
-          export LLM_URL="`terraform -chdir=./terraform output -raw s3_static_page`"
-          echo "
-# Deployed LLM Web APP:
-
-[$LLM_URL]($LLM_URL)" >> $GITHUB_STEP_SUMMARY
+          export LLM_URL="`terraform -chdir=./terraform output -raw s3_static_page`" && \
+          echo "[$LLM_URL]($LLM_URL)" >> $GITHUB_STEP_SUMMARY
