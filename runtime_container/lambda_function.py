@@ -23,6 +23,13 @@ bad_words = os.getenv('LLM_FORBIDDEN_WORDS', default='').split()
 cache_host = os.getenv('REDIS_HOST', default='')
 
 def handler(event, context):
+  # Fetch a list of dictionary words.
+  # (Small random subset of /usr/share/dict/words)
+  with open('username_words.txt', 'r') as dict_words:
+    words = dict_words.read().split()
+
+  print('Loaded words')
+
   # Perform rate-limiting if a cache is configured.
   if cache_host:
     cache = redis.Redis(host=cache_host, port=6379, decode_responses=True)
@@ -57,6 +64,8 @@ def handler(event, context):
                      max_new_tokens=45,
                      repetition_penalty=1.2)
 
+  print('Loaded generator')
+
   #prompt = f'The following is a discussion from a social media website. Post: "{tweet}". Response: '
   #prompt = f'"{post}". The response to this social media post is: '
   #prompt = f'Social media post: "{post}". Social media response: "@'
@@ -71,6 +80,7 @@ def handler(event, context):
   # Produce and filter three generated responses from the AI model.
   responses = []
   for i in range(3):
+    # Response
     gen_resp = generator(prompt)
     resp = gen_resp[0]['generated_text']
     #print(resp)
@@ -108,7 +118,26 @@ def handler(event, context):
     if resp[0] == '>':
       resp = resp[1:]
     resp = resp.replace('\\u2019', "'")
-    responses.append(resp)
+
+    # Generate a random username from dictionary words.
+    username = words[int(random.random()*len(words))]
+    style = random.random()
+    if style > 0.75:
+      part1 = words[int(random.random()*len(words))]
+      part2 = words[int(random.random()*len(words))]
+      username = f'{part1}{part2}'
+    elif style > 0.5:
+      part1 = words[int(random.random()*len(words))]
+      part2 = words[int(random.random()*len(words))]
+      username = f'{part1}_{part2}'
+    elif style > 0.25:
+      part1 = words[int(random.random()*len(words))]
+      part2 = words[int(random.random()*len(words))]
+      part3 = words[int(random.random()*len(words))]
+      username = f'{part1}_{part2}{part3}'
+
+    responses.append({'response': resp, 'user': username})
+    print(f'Response {i} done.')
 
   # Return the generated responses.
   return {

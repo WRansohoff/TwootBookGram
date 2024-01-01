@@ -2,7 +2,12 @@ import React, {useState} from "react";
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import DefaultLayout from "@/layouts/default";
-import {Button, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Textarea} from "@nextui-org/react";
+import {Button, Card, CardBody, CardHeader, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure, Textarea} from "@nextui-org/react";
+
+// Dictionary to track responses.
+var responses = [
+  { 'user': 'no_user', 'response': 'no_response' }
+];
 
 // Helper function to fetch responses from the AWS Lambda function.
 export async function getResponses(setResponseLoading: any) {
@@ -27,14 +32,15 @@ export async function getResponses(setResponseLoading: any) {
       body: JSON.stringify({input: post})
     }).then(data => data.json())
       .then(resp => {
+        responses = []
         // Process JSON response.
         // Debug: Log the structured response.
         //console.log(resp);
 
         // Render the responses on the page.
-        // TODO: Add fake username / avatar bubbles for better verisimilitude.
+        // TODO: Exclusively use React component list
         let tweets = "";
-        resp.responses.forEach((str) => { tweets += str + '\n---\n'; });
+        resp.responses.forEach((rjs) => { tweets += rjs['response'] + '\n---\n'; responses = responses.concat({'user': rjs['user'], 'response': rjs['response']}); });
         document.getElementById('responses').innerText = tweets;
 
         // Debug: Log that the API call/post-process is complete.
@@ -117,6 +123,28 @@ export default function Home() {
               <p className={styles.description}>
                 ----------------
               </p>
+              <ul>
+                {
+                  responses.map((response) => {
+                    return (
+                      <Card key="response_{response['user']}">
+                        <CardHeader>
+                          <span className={styles.response_icon}>
+                          </span>
+                          <span className={styles.response_username}>
+                            {response["user"]}
+                          </span>
+                        </CardHeader>
+                        <CardBody>
+                          <p className={styles.response_post}>
+                            {response["response"]}
+                          </p>
+                        </CardBody>
+                      </Card>
+                    );
+                  })
+                }
+              </ul>
             </div>
             <br/><br/>
             <footer>

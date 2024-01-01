@@ -15,6 +15,8 @@ RUN pip cache purge
 RUN mkdir ${LAMBDA_TASK_ROOT}/opt-350m-ov
 COPY opt-350m-ov ${LAMBDA_TASK_ROOT}/opt-350m-ov
 
+COPY username_words.txt ${LAMBDA_TASK_ROOT}/
+
 COPY lambda_function.py ${LAMBDA_TASK_ROOT}/
 
 # Debug: Drop into a shell in the container when it launches.

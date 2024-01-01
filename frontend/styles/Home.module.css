@@ -38,6 +38,27 @@
   font-size: 1.5rem;
 }
 
+.response_icon {
+  float: left;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, blue 0, green 25%, red 100%);
+}
+
+.response_username {
+  float: left;
+  padding-left: 0.5em;
+  font-size: 1.5em;
+  vertical-align: center;
+  height: 2em;
+}
+
+.response_post {
+  line-height: 2.5;
+  font-size: 2.5rem;
+}
+
 .grid {
   display: flex;
   align-items: center;
