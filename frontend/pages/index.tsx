@@ -6,7 +6,6 @@ import {Button, Card, CardBody, CardHeader, Modal, ModalContent, ModalHeader, Mo
 
 // Dictionary to track responses.
 var responses = [
-  { 'user': 'no_user', 'response': 'no_response' }
 ];
 
 // Helper function to fetch responses from the AWS Lambda function.
@@ -38,10 +37,10 @@ export async function getResponses(setResponseLoading: any) {
         //console.log(resp);
 
         // Render the responses on the page.
-        // TODO: Exclusively use React component list
         let tweets = "";
-        resp.responses.forEach((rjs) => { tweets += rjs['response'] + '\n---\n'; responses = responses.concat({'user': rjs['user'], 'response': rjs['response']}); });
-        document.getElementById('responses').innerText = tweets;
+        resp.responses.forEach((rjs) => {
+          responses = responses.concat({'user': rjs['user'], 'response': rjs['response']});
+        });
 
         // Debug: Log that the API call/post-process is complete.
         console.log('done');
@@ -79,23 +78,16 @@ export default function Home() {
               </Button>
             </p>
             <br/>
-            <p className={styles.description}>
+            <p className={styles.left_description}>
               Enter a short post into the text box below to view AI-generated responses.
-            </p>
-            <p className={styles.description}>
-              The responses aim to simulate our social media environment over the past decade.
-            </p>
-            <p className={styles.description}>
-              Most LLM training sets include a corpus of posts scraped from social media websites.
-            </p>
-            <p className={styles.description}>
-              In order to run this demo cheaply, I used a very small AI model.
-            </p>
-            <p className={styles.description}>
-              The results will not compare favorably to a state of the art chatbot, and the responses usually take 1-2 minutes to generate.
-            </p>
-            <p className={styles.description}>
-              However, the inference runs in a serverless container service with less than 2GB RAM and no GPU.
+              <br/>
+              The language model is prompted to respond as a social media user.
+              <br/>
+              Most LLMs are trained on data that includes social media posts.
+              <br/>
+              In order to run this demo cheaply, I used a very small AI model, so the responses will not always make sense.
+              <br/>
+              The hardware is also cheap - serverless functions with 2GB RAM - so the responses take 1-2 minutes to generate.
             </p>
             <br/><br/>
             <div className={styles.description}>
@@ -113,23 +105,18 @@ export default function Home() {
               </Button>
             </div>
             <div className={styles.description}>
-              <p className={styles.description}>
-                Simulated posts:
-                <br/>
-                ----------------
-              </p>
-              <p className={styles.description} id="responses">
-              </p>
-              <p className={styles.description}>
-                ----------------
-              </p>
               <ul>
                 {
                   responses.map((response) => {
+                    let cols = ["#" + Math.floor(Math.random()*16777215).toString(16),
+                                "#" + Math.floor(Math.random()*16777215).toString(16),
+                                "#" + Math.floor(Math.random()*16777215).toString(16)];
+                    let bg_col = {"background": "radial-gradient(circle at center, " + cols[0] + " 0, " + cols[1] + " 25%, " + cols[2] + " 100%)"};
+                    let card_key = "response_" + response['user'];
                     return (
-                      <Card key="response_{response['user']}">
+                      <Card key={card_key} className={styles.response_card}>
                         <CardHeader>
-                          <span className={styles.response_icon}>
+                          <span className={styles.response_icon} style={bg_col}>
                           </span>
                           <span className={styles.response_username}>
                             {response["user"]}
