@@ -39,7 +39,10 @@ def handler(event, context):
     cache.expire(rl_key, 600)
     cache.decrby(rl_key, 1)
     if int(cache.get(rl_key)) <= 0:
-      return { 'responses': ['<rate limit exceeded, please try again later>'] }
+      return { 'responses': [{
+        'response': '<rate limit exceeded, please try again later>',
+        'user': '<System>'
+      }]}
   else:
     print('Warning: no rate-limiting cache configured.')
 
