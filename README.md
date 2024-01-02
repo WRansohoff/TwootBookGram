@@ -2,7 +2,7 @@
 
 This project is a simple scalable web app which produces AI-generated responses to 140-character messages which a user inputs. It is meant as a demonstration of how to deploy a small scalable AI-based web app very cheaply, and as an art project which holds a mirror up to how ordinary people tend to act in pseudonymous online spaces.
 
-Work In Progress: You can demo the web app at [https://twootbookgram.com](https://twootbookgram.com), but it may be unstable and I am still writing the CI/CD pipeline, tests, documentation.
+Work In Progress: You can demo the web app at [https://twootbookgram.com](https://twootbookgram.com), or check the URL in the latest GitHub Actions build for a link to a static site hosted in S3. I am still writing tests for the CI/CD pipeline, though.
 
 ## Tech Stack
 
@@ -32,9 +32,9 @@ In the words of Kurt Vonnegut (*Cat's Cradle*): "Don't be a fool! Close this boo
 
 ## Installation
 
-You will need to provide the OPT-350M model yourself; I don't know if I am allowed to distribute it, and it's too large to stuff into a small Git repository anyways. You can find instructions in the `runtime_container/opt-350m/` directory.
+You will need to provide the OPT-350M model yourself; I don't know if I am allowed to distribute it, and it's too large to stuff into a small Git repository anyways. You can find instructions in the `runtime_container/opt-350m/` directory. The CI/CD pipeline automatically downloads and processes the model.
 
-This would probably also work with other PyTorch models that have been configured the HuggingFace pipelines, but I've only tested the opt-350m and opt-2.7b LLMs.
+This would probably also work with other PyTorch models that have been configured the HuggingFace pipelines, but I've only tested the opt-350m and opt-2.7b LLMs. The 2.7b-parameter model is too large to fit into AWS Lambda's soft limit of 3GB RAM in their serverless functions.
 
 You can find instructions for quantizing the model in `runtime_container/opt-350m-ov/`.
 
@@ -68,6 +68,3 @@ You'll need your own AWS account - (TODO: instructions)
 
 You'll also need to allow your GitHub repository to claim permissions in your AWS account, by configuring OIDC between the two platforms. (TODO: instructions)
 
-# Documentation
-
-TODO: Sphinx docs, generation instructions
