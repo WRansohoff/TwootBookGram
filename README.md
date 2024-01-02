@@ -52,7 +52,7 @@ This repository is also set up with GitHub Actions to run some basic tests and d
 
 ### Infrastructure Layout
 
-TODO: Image
+![Infrastructure layout](./infrastructure.svg)
 
 TODO: Description
 
