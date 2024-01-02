@@ -7,9 +7,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="423.67172mm"
-   height="279.15399mm"
-   viewBox="0 0 423.67172 279.15399"
+   width="410mm"
+   height="270mm"
+   viewBox="0 0 410 270"
    version="1.1"
    id="svg8"
    inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)"
@@ -268,9 +268,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.63710706"
-     inkscape:cx="756.69511"
-     inkscape:cy="749.79123"
+     inkscape:zoom="0.37871985"
+     inkscape:cx="801.8825"
+     inkscape:cy="673.2472"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -296,9 +296,10 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(133.46767,55.273311)">
+     transform="translate(138.57468,55.273311)">
     <g
-       id="g2672">
+       id="g2672"
+       transform="matrix(0.93288208,0,0,0.93288208,-4.4104658,-0.91532772)">
       <g
          fill="none"
          fill-rule="evenodd"
@@ -333,7 +334,7 @@
     </g>
     <g
        id="g1365"
-       transform="translate(-20.195007,22.208418)">
+       transform="matrix(0.93288208,0,0,0.93288208,-23.250026,19.802508)">
       <g
          fill="none"
          fill-rule="evenodd"
@@ -362,13 +363,13 @@
            style="font-size:8.46667px;text-align:center;text-anchor:middle;stroke-width:0.264583">Edge Distribution:</tspan><tspan
            sodipodi:role="line"
            x="-16.079645"
-           y="73.849075"
+           y="73.849083"
            style="font-size:8.46667px;text-align:center;text-anchor:middle;stroke-width:0.264583"
            id="tspan991">AWS CloudFront</tspan></text>
     </g>
     <g
        id="g1373"
-       transform="translate(3.1750001,19.152143)">
+       transform="matrix(0.93288208,0,0,0.93288208,-1.4485651,16.951363)">
       <g
          fill="none"
          fill-rule="evenodd"
@@ -403,7 +404,7 @@
     </g>
     <g
        id="g1397"
-       transform="translate(-10.194996,-41.481637)">
+       transform="matrix(0.93288208,0,0,0.93288208,-13.921195,-39.612803)">
       <g
          fill="none"
          fill-rule="evenodd"
@@ -432,13 +433,13 @@
            style="font-size:8.46667px;text-align:center;text-anchor:middle;stroke-width:0.264583">Rate-limit cache:</tspan><tspan
            sodipodi:role="line"
            x="149.78239"
-           y="248.12767"
+           y="248.12769"
            style="font-size:8.46667px;text-align:center;text-anchor:middle;stroke-width:0.264583"
            id="tspan1091">AWS ElastiCache (Redis)</tspan></text>
     </g>
     <g
        id="g1381"
-       transform="translate(-24.561495,3.6218547)">
+       transform="matrix(0.93288208,0,0,0.93288208,-27.323445,2.4634356)">
       <g
          fill="none"
          fill-rule="evenodd"
@@ -472,7 +473,8 @@
            id="tspan1141">AWS Lambda</tspan></text>
     </g>
     <g
-       id="g2722">
+       id="g2722"
+       transform="matrix(0.93288208,0,0,0.93288208,-4.4104658,-0.91532772)">
       <g
          fill="none"
          fill-rule="evenodd"
@@ -507,28 +509,28 @@
     </g>
     <g
        id="g2658"
-       transform="translate(0,0.52916667)">
+       transform="matrix(0.93288208,0,0,0.93288208,-4.4104658,-0.42167762)">
       <g
          id="g1300"
          transform="matrix(0.90708663,0,0,0.90708663,69.51401,83.123897)">
         <polygon
            class="cls-1"
-           points="141.41,114.16 102.58,91.75 102.58,46.91 141.41,69.33 "
+           points="102.58,91.75 102.58,46.91 141.41,69.33 141.41,114.16 "
            id="polygon1254"
            transform="matrix(0.26458333,0,0,0.26458333,3.203841,-104.54749)" />
         <polygon
            class="cls-1"
-           points="184.5,91.75 184.5,46.91 145.67,69.33 145.67,114.16 "
+           points="184.5,46.91 145.67,69.33 145.67,114.16 184.5,91.75 "
            id="polygon1256"
            transform="matrix(0.26458333,0,0,0.26458333,3.203841,-104.54749)" />
         <polygon
            class="cls-1"
-           points="98.33,89.14 98.33,44.3 59.5,21.88 59.5,66.72 "
+           points="98.33,44.3 59.5,21.88 59.5,66.72 98.33,89.14 "
            id="polygon1258"
            transform="matrix(0.26458333,0,0,0.26458333,3.203841,-104.54749)" />
         <polygon
            class="cls-1"
-           points="102.58,141.49 141.41,163.91 141.41,119.38 141.41,119.08 102.58,96.66 "
+           points="102.58,96.66 102.58,141.49 141.41,163.91 141.41,119.38 141.41,119.08 "
            id="polygon1260"
            transform="matrix(0.26458333,0,0,0.26458333,3.203841,-104.54749)" />
       </g>
@@ -550,7 +552,8 @@
            id="tspan1306">Terraform</tspan></text>
     </g>
     <g
-       id="g2648">
+       id="g2648"
+       transform="matrix(0.93288208,0,0,0.93288208,-4.4104658,-0.91532772)">
       <text
          xml:space="preserve"
          style="font-size:8.46667px;line-height:1.25;font-family:Bahnschrift;-inkscape-font-specification:Bahnschrift;stroke-width:0.264583"
@@ -576,39 +579,39 @@
          style="stroke-width:0.307292" />
     </g>
     <rect
-       style="fill:none;stroke:#844fba;stroke-width:1.60515;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+       style="fill:none;stroke:#844fba;stroke-width:1.49742;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
        id="rect1399"
-       width="278.0611"
-       height="230.55049"
-       x="11.340386"
-       y="-7.4723773" />
+       width="259.39822"
+       height="215.07642"
+       x="6.1687775"
+       y="-7.8861747" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Arrow2Sstart)"
-       d="M 139.33663,-9.9627493 V -28.878896"
+       style="fill:none;stroke:#000000;stroke-width:1.86576;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Arrow2Sstart)"
+       d="M 125.57418,-10.209398 V -27.855932"
        id="path1401" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:1.93626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Send)"
-       d="m -92.8565,116.72129 h 39.072151"
+       style="fill:none;stroke:#000000;stroke-width:1.8063;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Send)"
+       d="m -91.034631,107.97187 h 36.449709"
        id="path1779" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:2.08015;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1893)"
-       d="M -21.198503,116.72357 H 40.582643"
+       style="fill:none;stroke:#000000;stroke-width:1.94053;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1893)"
+       d="M -24.18617,107.974 H 33.448354"
        id="path1781" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker2002)"
-       d="M 73.386808,116.72357 H 122.24582"
+       style="fill:none;stroke:#000000;stroke-width:1.86576;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker2002)"
+       d="M 64.050772,107.974 H 109.63047"
        id="path1998" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:1.99824;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker2088)"
-       d="M 214.05637,116.70437 H 157.04504"
+       style="fill:none;stroke:#000000;stroke-width:1.86412;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker2088)"
+       d="M 195.27889,107.95609 H 142.09404"
        id="path2084" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:2.02613;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#marker2510)"
-       d="M 139.33663,152.31568 V 130.32636"
+       style="fill:none;stroke:#000000;stroke-width:1.89014;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#marker2510)"
+       d="M 125.57418,141.17724 V 120.6638"
        id="path2506" />
     <g
        id="g2796"
-       transform="translate(-82.760548,-9.1970131)">
+       transform="matrix(0.93288208,0,0,0.93288208,-81.616298,-9.4950561)">
       <text
          xml:space="preserve"
          style="font-size:8.46667px;line-height:1.25;font-family:Bahnschrift;-inkscape-font-specification:Bahnschrift;stroke-width:0.264583"
@@ -642,11 +645,11 @@
       </g>
     </g>
     <rect
-       style="fill:none;stroke:#844fba;stroke-width:1.35344;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+       style="fill:none;stroke:#844fba;stroke-width:1.2626;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
        id="rect2782"
-       width="255.03722"
-       height="178.71053"
-       x="17.349962"
-       y="32.473198" />
+       width="237.91965"
+       height="166.71585"
+       x="11.775003"
+       y="29.378338" />
   </g>
 </svg>
