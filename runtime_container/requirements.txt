@@ -3,7 +3,7 @@ redis
 
 # Huggingface AI model pipeline packages
 optimum-intel==1.12.2
-nncf=2.7.0
+nncf==2.7.0
 optimum[openvino,nncf,onnxruntime]==1.16.1
 transformers==4.36.2
 
