@@ -1,8 +1,12 @@
+# Ensure that telemetry won't be checked in AWS Lambda function,
+# by setting "CI" env var
+import os
+os.environ["CI"] = "true"
+
 from transformers import AutoTokenizer, set_seed, pipeline, AutoModelForCausalLM
 from optimum.intel import OVModelForCausalLM
 
 import json
-import os
 import random
 import redis
 import torch

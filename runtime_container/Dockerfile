@@ -5,6 +5,7 @@ ARG REDIS_HOST=
 
 ENV LLM_FORBIDDEN_WORDS $LLM_FORBIDDEN_WORDS
 ENV REDIS_HOST $REDIS_HOST
+ENV CI "true"
 
 RUN pip install --upgrade pip
 RUN pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
