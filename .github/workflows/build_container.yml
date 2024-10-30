@@ -48,7 +48,7 @@ jobs:
           optimum-cli export openvino --model opt-350m/ \
                                       --cache_dir opt-350m-ov/model_cache/ \
                                       --task text-generation \
-                                      --int8 \
+                                      --quantize int8-dynamic \
                                       opt-350m-ov/ && \
           python3 -c "from optimum.intel import OVModelForCausalLM; OVModelForCausalLM.from_pretrained('opt-350m-ov', use_cache=False)"
 
