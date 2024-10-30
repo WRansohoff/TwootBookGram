@@ -2,8 +2,8 @@
 redis
 
 # Huggingface AI model pipeline packages
-optimum[openvino,nncf,onnxruntime]
-transformers
+optimum[openvino,nncf,onnxruntime]==1.16.1
+transformers==4.36.2
 
 # OpenVINO model optimizer
-openvino
+openvino==2023.2.0
