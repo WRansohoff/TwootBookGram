@@ -9,3 +9,4 @@ transformers==4.36.2
 
 # OpenVINO model optimizer
 openvino==2023.2.0
+openvino-telemetry===2023.2.1
