@@ -80,13 +80,13 @@ export default function Home() {
             <br/>
             <p className={styles.left_description}>
               Enter a short post into the text box below to view AI-generated responses.
-              <br/>
+              <div class={styles.line_spacer} />
               The language model is prompted to respond as a social media user.
-              <br/>
+              <div class={styles.line_spacer} />
               Most LLMs are trained on data that includes social media posts.
-              <br/>
+              <div class={styles.line_spacer} />
               In order to run this demo cheaply, I used a very small AI model, so the responses will not always make sense.
-              <br/>
+              <div class={styles.line_spacer} />
               The hardware is also cheap - serverless functions with 2GB RAM - so the responses take 1-2 minutes to generate.
             </p>
             <br/><br/>
