@@ -46,7 +46,7 @@ resource "aws_lambda_function" "llm_app_function" {
   package_type  = "Image"
   image_uri     = "${aws_ecr_repository.llm_app_image_repo.repository_url}:latest"
   memory_size   = 2048
-  timeout       = 180
+  timeout       = 300
   publish       = true
 
   vpc_config {
