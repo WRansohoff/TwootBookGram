@@ -30,19 +30,34 @@ def handler(event, context):
 
   print('Loaded words')
 
+  # Temporary debug - has event format changed?
+  print(f'{event}')
+
   # Perform rate-limiting if a cache is configured.
   if cache_host:
     cache = redis.Redis(host=cache_host, port=6379, decode_responses=True)
-    from_ip = event['headers']['x-forwarded-for']
-    rl_key = f'{from_ip}:LLM'
-    cache.setnx(rl_key, 10)
-    cache.expire(rl_key, 600)
-    cache.decrby(rl_key, 1)
-    if int(cache.get(rl_key)) <= 0:
-      return { 'responses': [{
-        'response': '<rate limit exceeded, please try again later>',
-        'user': '<System>'
-      }]}
+    try:
+        from_ip = event['headers']['x-forwarded-for']
+        rl_key = f'{from_ip}:LLM'
+        cache.setnx(rl_key, 10)
+        cache.expire(rl_key, 600)
+        cache.decrby(rl_key, 1)
+        if int(cache.get(rl_key)) <= 0:
+          return { 'responses': [{
+            'response': '<rate limit exceeded, please try again later>',
+            'user': '<System>'
+          }]}
+    except KeyError:
+        # If no referral IP is available, fall back to a system-wide rate limit.
+        rl_key = f'SYSTEMLIMIT:LLM'
+        cache.setnx(rl_key, 128)
+        cache.expire(rl_key, 600)
+        cache.decrby(rl_key, 1)
+        if int(cache.get(rl_key)) <= 0:
+          return { 'responses': [{
+            'response': '<system-wide rate limit exceeded, please try again later>',
+            'user': '<System>'
+          }]}
   else:
     print('Warning: no rate-limiting cache configured.')
 
