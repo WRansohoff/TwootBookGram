@@ -34,9 +34,6 @@ def handler(event, context):
 
   print('Loaded words')
 
-  # Temporary debug - has event format changed?
-  print(f'{event}')
-
   # Perform rate-limiting if a cache is configured.
   if cache_host:
     cache = redis.Redis(host=cache_host, port=6379, decode_responses=True)
